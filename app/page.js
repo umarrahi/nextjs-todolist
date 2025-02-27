@@ -14,24 +14,32 @@ const page = () => {
     console.log(mainTask);
   };
 
+  const deleteHandler = (i) =>{
+    let copyTask = [...mainTask]
+    copyTask.splice(i,1);
+    setMainTask(copyTask)
+  }
+
   let renderTask = <h2>Task is not available</h2>;
 
   if (mainTask.length > 0) {
     renderTask = mainTask.map((t, i) => {
       return (
-        <li className="w-4/12 m-auto">
+        <li key={i} className="w-5/12 m-auto mb-2">
           <div className="flex justify-between items-center">
-            <h2 className="font-bold">{i} {t.title}</h2>
-            <h3>{t.desc}</h3>
-          <button className="bg-red-400 py-2 px-4 rounded text-red-50 font-semibold">Delete</button>
+            <h2 className="font-bold">{t.title}</h2>
+            <p>{t.desc}</p>
+            <button onClick={()=>{
+              deleteHandler(I)
+            }} 
+            className="bg-red-400 py-2 px-4 rounded text-red-50 font-semibold">
+              Delete
+            </button>
           </div>
         </li>
-        
       );
     });
   }
-
-
 
   return (
     <>
